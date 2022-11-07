@@ -3,7 +3,6 @@ import datetime
 
 
 class ExamplePage(PageWithProps):
-    # Need to find some way to shorten this
     route = '/example'
     template = '/Users/williamherring/Development/crest/sample_project/pages/templates/example.html'
 

@@ -10,6 +10,12 @@ _entrypoint = '/'
 
 class DevServer(BaseHTTPRequestHandler):
     def do_GET(self):
+        if self.path == '/' and _entrypoint != '/':
+            print(_entrypoint)
+            self.send_response(307)
+            self.send_header('Location', _entrypoint)
+            self.end_headers()
+
         for page in _pages:
             new_page = page()
             if new_page.route in self.path:
