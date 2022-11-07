@@ -1,7 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 host = 'localhost'
-port = 8000
 placeholder_html = "<html><head><title>Crest</title></head><body><h1>Crest is running!</h1><br><p>Read " \
                    "the docs.</p></body></html> "
 
@@ -14,7 +13,7 @@ class DevServer(BaseHTTPRequestHandler):
         self.wfile.write(bytes(placeholder_html, 'utf-8'))
 
 
-def start():
+def start(port=8000):
     server = HTTPServer((host, port), DevServer)
     print(f'Server started at http://{host}:{port}. Ready to accept connections.')
     try:
