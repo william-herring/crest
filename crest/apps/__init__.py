@@ -1,4 +1,4 @@
-from servers import devserver
+from crest.servers import devserver
 
 
 class App:
@@ -9,11 +9,8 @@ class App:
         else:
             self.entrypoint = '/'
 
-    def render(self):
-        pass
-
     def run(self, **kwargs):
-        self.render()
         if 'port' in kwargs:
-            devserver.start(kwargs.get('port'))
-        devserver.start()
+            devserver.start(self.pages, kwargs.get('port'), self.entrypoint)
+
+        devserver.start(self.pages, 8000, self.entrypoint)
