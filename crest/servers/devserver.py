@@ -1,8 +1,9 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import importlib.resources as pkg_resources
+import resources
 
 host = 'localhost'
-placeholder_html = "<html><head><title>Crest</title></head><body><h1>Crest is running!</h1><br><p>Read " \
-                   "the docs.</p></body></html> "
+placeholder_html = pkg_resources.read_text(resources, 'placeholder.html')
 
 _pages = []
 _entrypoint = '/'
