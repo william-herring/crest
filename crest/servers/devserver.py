@@ -1,6 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import importlib.resources as pkg_resources
-import resources
+from crest import resources
 
 host = 'localhost'
 placeholder_html = pkg_resources.read_text(resources, 'placeholder.html')
@@ -18,12 +18,11 @@ class DevServer(BaseHTTPRequestHandler):
             self.end_headers()
 
         for page in _pages:
-            new_page = page()
-            if new_page.route in self.path:
+            if page.route in self.path:
                 self.send_response(200)
                 self.send_header("Content-type", "text/html")
                 self.end_headers()
-                self.wfile.write(bytes(new_page.render(), 'utf-8'))
+                self.wfile.write(bytes(page.render(), 'utf-8'))
                 return
 
         self.send_response(200)
