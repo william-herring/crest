@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class DynamicPage(ABC):
     def __init__(self):
-        self.request = ''
+        self.query = ''
 
     @property
     @abstractmethod
@@ -28,7 +28,7 @@ class DynamicPage(ABC):
         except IndexError:
             return False
 
-        self.request = url.split(base[0])[1]
+        self.query = url.split(base[0])[1]
         return True
 
     def render(self):

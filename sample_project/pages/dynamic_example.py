@@ -7,5 +7,5 @@ class DynamicExamplePage(DynamicPage):
 
     def props(self):
         return {
-            'title': self.request,
+            'title': self.query,
         }
