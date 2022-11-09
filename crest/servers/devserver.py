@@ -18,7 +18,7 @@ class DevServer(BaseHTTPRequestHandler):
             self.end_headers()
 
         for page in _pages:
-            if page.route in self.path:
+            if page.check_route(self.path):
                 self.send_response(200)
                 self.send_header("Content-type", "text/html")
                 self.end_headers()

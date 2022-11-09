@@ -1,7 +1,10 @@
 from abc import ABC, abstractmethod
 
 
-class PageWithProps(ABC):
+class DynamicPage(ABC):
+    def __init__(self):
+        self.request = ''
+
     @property
     @abstractmethod
     def template(self):
@@ -17,10 +20,16 @@ class PageWithProps(ABC):
     def route(self):
         pass
 
-    def check_route(self, url):
-        if url == self.route:
-            return True
-        return False
+    # Must call before render
+    def check_route(self, url: str):
+        base = self.route.split('[')
+        try:
+            url.split(base[0])[1]
+        except IndexError:
+            return False
+
+        self.request = url.split(base[0])[1]
+        return True
 
     def render(self):
         with open(self.template, 'r') as temp:
