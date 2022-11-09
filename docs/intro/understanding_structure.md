@@ -95,7 +95,6 @@ A Page contains the Template, route and configurations for a page. When declarin
 ```PageWithoutProps```, ```PageWithProps```, ```DynamicPage``` and ```QueriedPage```. For a page which passes properties to a template, use ```PageWithProps```.
 ```python
 from crest.pages import PageWithProps
-import datetime
 
 
 class SamplePage(PageWithProps):
