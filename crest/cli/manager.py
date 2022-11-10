@@ -1,8 +1,9 @@
-# Default commands
+from crest.cli.commands.createapp import CreateApp
 from crest.cli.commands.startserver import StartServer
 
 commands = {
-    'startserver': StartServer()
+    'startserver': StartServer(),
+    'createapp': CreateApp()
 }
 
 
