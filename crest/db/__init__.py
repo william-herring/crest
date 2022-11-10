@@ -1,5 +1,4 @@
 import psycopg2
-
 from db.schema import Model
 
 
