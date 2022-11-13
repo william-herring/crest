@@ -38,3 +38,38 @@ class DynamicPage(ABC):
                 content = content.replace('{ ' + prop + ' }', self.props().get(prop))
 
             return content
+
+
+class QueriedPage(ABC):
+    def __init__(self):
+        self.query = ''
+
+    @property
+    @abstractmethod
+    def template(self):
+        pass
+
+    @property
+    @abstractmethod
+    def props(self):
+        pass
+
+    @property
+    @abstractmethod
+    def route(self):
+        pass
+
+    # Must call before render
+    def check_route(self, url: str):
+        base = url.split('?')
+        if base[0] + '/' == self.route:
+            # queried parameter logic
+            return True
+
+    def render(self):
+        with open(self.template, 'r') as temp:
+            content = temp.read()
+            for prop in self.props().keys():
+                content = content.replace('{ ' + prop + ' }', self.props().get(prop))
+
+            return content
