@@ -62,9 +62,10 @@ class QueriedPage(ABC):
     # Must call before render
     def check_route(self, url: str):
         base = url.split('?')
-        if base[0] + '/' == self.route:
-            # queried parameter logic
+        if base[0] == self.route:
+            self.query = base[1].split('=')[1]
             return True
+        return False
 
     def render(self):
         with open(self.template, 'r') as temp:
