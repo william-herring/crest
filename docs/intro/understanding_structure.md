@@ -17,8 +17,9 @@ The most simple concepts you must understand are Apps, Pages and Templates.
 ## Apps
 Your application is run from the ```app.py``` file. 
 This file is generated with a basic app component, which will contain all your pages and runtime configurations. It will look like this:
+
 ```python
-from crest.apps import App
+from crest.app import App
 from myapp.pages.sample import SamplePage
 
 MyApp = App([

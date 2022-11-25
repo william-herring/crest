@@ -1,4 +1,4 @@
-from crest.pages.dynamic import DynamicPage, QueriedPage
+from crest.pages import DynamicPage, QueriedPage
 
 
 class DynamicExamplePage(DynamicPage):

@@ -1,6 +1,6 @@
 # QueriedPage
 
-```QueriedPage``` is used to build pages that accept query parameters. 
+```QueriedPage``` is used to build pages with dynamic routes.
 
 ## Properties
 

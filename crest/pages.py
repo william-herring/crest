@@ -1,7 +1,43 @@
 from abc import ABC, abstractmethod
 
 
+class PageWithProps(ABC):
+    """
+    Used to build pages that pass properties to a template.
+    """
+    @property
+    @abstractmethod
+    def template(self):
+        pass
+
+    @property
+    @abstractmethod
+    def props(self):
+        pass
+
+    @property
+    @abstractmethod
+    def route(self):
+        pass
+
+    def check_route(self, url):
+        if url == self.route:
+            return True
+        return False
+
+    def render(self):
+        with open(self.template, 'r') as temp:
+            content = temp.read()
+            for prop in self.props().keys():
+                content = content.replace('{ ' + prop + ' }', self.props().get(prop))
+
+            return content
+
+
 class DynamicPage(ABC):
+    """
+    Used to build pages with dynamic routes.
+    """
     def __init__(self):
         self.query = ''
 
@@ -41,6 +77,9 @@ class DynamicPage(ABC):
 
 
 class QueriedPage(ABC):
+    """
+    Used to build pages with dynamic routes.
+    """
     def __init__(self):
         self.query = ''
 
