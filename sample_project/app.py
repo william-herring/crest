@@ -1,6 +1,5 @@
 from crest.app import App
-from sample_project.pages.example import ExamplePage
-from sample_project.pages.dynamic_example import DynamicExamplePage, QueriedExamplePage
+from pages import *
 
 MyApp = App(__file__, [
     ExamplePage(),
