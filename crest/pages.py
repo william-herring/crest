@@ -70,7 +70,7 @@ class DynamicPage(Page):
             return content
 
 
-class QueriedPage(ABC):
+class QueriedPage(Page):
     """
     Used to build pages with dynamic routes.
     """
@@ -80,20 +80,9 @@ class QueriedPage(ABC):
 
     @property
     @abstractmethod
-    def template(self):
-        pass
-
-    @property
-    @abstractmethod
     def props(self):
         pass
 
-    @property
-    @abstractmethod
-    def route(self):
-        pass
-
-    # Must call before render
     def check_route(self, url: str):
         base = url.split('?')
         if base[0] == self.route:

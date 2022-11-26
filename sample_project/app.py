@@ -4,7 +4,7 @@ from pages import *
 MyApp = App(__file__, [
     ExamplePage(),
     DynamicExamplePage(),
-    QueriedExamplePage()
+    QueriedExamplePage(),
 ])
 
 MyApp.run()
