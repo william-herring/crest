@@ -1,4 +1,5 @@
-from crest.api import Handler
+from crest.api import Handler, Response
+import random
 
 
 class GetNumber(Handler):
@@ -6,4 +7,9 @@ class GetNumber(Handler):
     method = 'GET'
 
     def handle(self, req):
-        pass
+        num = random.randint(0, 10)
+        return Response(
+            200,
+            "{'Content-Type': 'text/html'}",
+            str({'Number': num}),
+        )
