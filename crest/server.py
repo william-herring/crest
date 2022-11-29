@@ -13,6 +13,7 @@ _entrypoint = '/'
 
 class DevServer(BaseHTTPRequestHandler):
     def do_GET(self):
+        self.handle_API('GET')
         if self.path == '/' and _entrypoint != '/':
             print(_entrypoint)
             self.send_response(307)
@@ -40,8 +41,13 @@ class DevServer(BaseHTTPRequestHandler):
                 self.headers,
                 self.rfile.read(content_length)
             )
-            # TODO: Find relevant API handler (may require some object sorting)
-        return
+            for handler in _handlers:
+                if handler.route == self.path.split('/api')[1] and handler.method == method:
+                    data = handler.handle(req)
+                    self.send_response(data.status, data.body)
+                    self.send_header(data.headers)
+                    self.end_headers()
+                    return
 
 
 def start(pages, handlers, port=8000, entrypoint='/'):

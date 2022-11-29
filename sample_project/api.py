@@ -3,7 +3,7 @@ import random
 
 
 class GetNumber(Handler):
-    route = 'api/get-number'
+    route = '/get-number'
     method = 'GET'
 
     def handle(self, req):
