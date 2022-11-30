@@ -6,11 +6,11 @@ inside methods like ```props```.
 
 ## Properties
 
-| Property       | Type         | Example                             |
-|----------------|--------------|-------------------------------------|
-| ```route```    | ```str```    | ```route='/example/[title]'```      |
-| ```template``` | ```str```    | ```path='templates/example.html'``` |
-| ```props```    | ```dict()``` | See below                           |
+| Property       | Type         | Example                        |
+|----------------|--------------|--------------------------------|
+| ```route```    | ```str```    | ```route='/example/[title]'``` |
+| ```template``` | ```str```    | ```path='example.html'```      |
+| ```props```    | ```dict()``` | See below                      |
 
 ## Example
 ```python
@@ -19,7 +19,7 @@ from crest.pages.dynamic import DynamicPage
 
 class DynamicExamplePage(DynamicPage):
     route = '/example/[title]'
-    template = 'templates/example.html'
+    template = 'example.html'
 
     def props(self):
         return {

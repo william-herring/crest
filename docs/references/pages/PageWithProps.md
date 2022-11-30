@@ -4,11 +4,11 @@
 
 ## Properties
 
-| Property       | Type         | Example                             |
-|----------------|--------------|-------------------------------------|
-| ```route```    | ```str```    | ```route='/example'```              |
-| ```template``` | ```str```    | ```path='templates/example.html'``` |
-| ```props```    | ```dict()``` | See below                           |
+| Property       | Type         | Example                     |
+|----------------|--------------|-----------------------------|
+| ```route```    | ```str```    | ```route='/example'```      |
+| ```template``` | ```str```    | ```path='example.html'```   |
+| ```props```    | ```dict()``` | See below                   |
 
 ## Example
 ```python
@@ -18,7 +18,7 @@ import datetime
 
 class ExamplePage(PageWithProps):
     route = '/example'
-    template = 'templates/example.html'
+    template = 'example.html'
 
     def props(self):
         return {

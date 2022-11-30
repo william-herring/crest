@@ -2,6 +2,9 @@ from abc import abstractmethod
 
 
 class Page:
+    """
+    Base page class that stores a route and template.
+    """
     @property
     @abstractmethod
     def template(self):

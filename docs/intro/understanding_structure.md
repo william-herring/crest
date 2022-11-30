@@ -3,27 +3,29 @@
 When you create a Crest app, your file structure will look something like this:
 ```
 myapp
-│   README.md
+|   api.py
 │   app.py    
-│
-└───pages
-    │   sample.py
-    │
-    └───templates
-        │   sample.html
+│   pages.py
+│   README.md
+|
+└───templates
+    │   sample.html
 ```
 The most simple concepts you must understand are Apps, Pages and Templates. 
 
 ## Apps
 Your application is run from the ```app.py``` file. 
-This file is generated with a basic app component, which will contain all your pages and runtime configurations. It will look like this:
+This file is generated with a basic app component, which will contain all your pages, API handlers and runtime configurations. It will look like this:
 
 ```python
 from crest.app import App
-from myapp.pages.sample import SamplePage
+from pages import SamplePage
+from api import SampleHandler
 
-MyApp = App([
+MyApp = App(__file__, [
     SamplePage()
+], [
+    SampleHandler()
 ])
 
 MyApp.run()
@@ -31,9 +33,11 @@ MyApp.run()
 The App component specifies what is contained inside the app. This includes pages and configurations. For example, you may pass an entrypoint
 argument, which will redirect the '/' route to something else.
 ```python
-MyApp = App([
+MyApp = App(__file__, [
     SamplePage()
-], entrypoint='/sample')
+], [
+    SampleHandler()
+] entrypoint='/sample')
 ```
 
 In most cases, the basic App component provided will work fine. However, if you wish to expand this component, you could use an inheritance-based approach
@@ -50,8 +54,10 @@ class MyApp(App):
         pass
 
 
-MyApp([
-    ExamplePage()
+MyApp(__file__, [
+    SamplePage()
+], [
+    SampleHandler()
 ]).run()
 ```
 The ```run()``` method begins the server and app process. You may specify a port by passing the keyword argument ```port```.
