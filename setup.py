@@ -31,7 +31,9 @@ setup(
     package_dir={"": "crest"},
     packages=find_packages(where="crest"),
     python_requires=">=3.7, <4",
-    install_requires=[],
+    install_requires=[
+        'typer>=0.7.0'
+    ],
 
     project_urls={
         "Bug Reports": "https://github.com/william-herring/crest/issues",

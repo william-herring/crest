@@ -1,8 +1,11 @@
 from crest.app import App
-from pages.example import ExamplePage
+from pages import ExamplePage
+from api import ExampleHandler
 
-MyApp = App([
-    ExamplePage(),
+MyApp = App(__file__, [
+    ExamplePage()
+], [
+    ExampleHandler()
 ])
 
 MyApp.run()

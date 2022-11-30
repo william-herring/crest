@@ -4,7 +4,7 @@ import datetime
 
 class ExamplePage(PageWithProps):
     route = '/example'
-    template = 'templates/example.html'
+    template = 'example.html'
 
     def props(self):
         return {
