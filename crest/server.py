@@ -13,7 +13,8 @@ _entrypoint = '/'
 
 class DevServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        self.handle_API('GET')
+        if self.handle_API('GET'):
+            return
         if self.path == '/' and _entrypoint != '/':
             print(_entrypoint)
             self.send_response(307)
@@ -35,7 +36,9 @@ class DevServer(BaseHTTPRequestHandler):
 
     def handle_API(self, method):
         if self.path.startswith('/api/'):
-            content_length = int(self.headers.get('Content-Length'))
+            content_length = 0
+            if 'Content-Length' in self.headers:
+                content_length = int(self.headers.get('Content-Length'))
             req = Request(
                 self.requestline,
                 self.headers,
@@ -44,10 +47,13 @@ class DevServer(BaseHTTPRequestHandler):
             for handler in _handlers:
                 if handler.route == self.path.split('/api')[1] and handler.method == method:
                     data = handler.handle(req)
-                    self.send_response(data.status, data.body)
-                    self.send_header(data.headers)
+                    self.send_response(data.status)
+                    for header in data.headers.keys():
+                        self.send_header(header, data.headers[header])
                     self.end_headers()
-                    return
+                    self.wfile.write(bytes(data.body, 'utf-8'))
+                    return True
+        return False
 
 
 def start(pages, handlers, port=8000, entrypoint='/'):

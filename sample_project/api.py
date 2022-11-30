@@ -10,6 +10,6 @@ class GetNumber(Handler):
         num = random.randint(0, 10)
         return Response(
             200,
-            "{'Content-Type': 'text/html'}",
-            str({'Number': num}),
+            {'Content-Type': 'text/html'},
+            str(num),
         )
