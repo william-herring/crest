@@ -33,7 +33,8 @@ setup(
     python_requires=">=3.7, <4",
     install_requires=[
         'typer>=0.7.0',
-        'rich'
+        'rich',
+        'pytest'
     ],
 
     project_urls={

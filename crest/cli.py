@@ -9,6 +9,9 @@ app = typer.Typer()
 
 @app.command()
 def create(title: str):
+    """
+    Create a new Crest app
+    """
     working_directory = os.getcwd()
     shutil.copytree(f'{os.path.dirname(os.path.realpath(__file__))}/resources/app_template', working_directory + '/app_template')
     os.rename('app_template', title)
@@ -17,7 +20,10 @@ def create(title: str):
 
 # Will be used to migrate schema changes once database module is fully implemented
 @app.command()
-def migrate(hi: int):
+def migrate():
+    """
+    Migrate database changes
+    """
     pass
 
 
