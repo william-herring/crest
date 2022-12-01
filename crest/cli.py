@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3.10
+#!/usr/local/bin/python3
 import typer
 import shutil
 import os
