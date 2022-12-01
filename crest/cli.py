@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import typer
 import shutil
 import os
