@@ -3,6 +3,7 @@ import typer
 import shutil
 import os
 from rich import print
+import webbrowser
 
 app = typer.Typer()
 
@@ -18,13 +19,12 @@ def create(title: str):
     print(f'Created [bold green]{title}[/bold green] at {working_directory + "/" + title}')
 
 
-# Will be used to migrate schema changes once database module is fully implemented
 @app.command()
-def migrate():
+def docs():
     """
-    Migrate database changes
+    View the Crest documentation
     """
-    pass
+    webbrowser.open('https://github.com/william-herring/crest/tree/main/docs')
 
 
 if __name__ == "__main__":
