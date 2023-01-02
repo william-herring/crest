@@ -4,7 +4,7 @@ from crest import resources
 from crest.api import Request
 
 host = 'localhost'
-placeholder_html = pkg_resources.read_text(resources, 'placeholder.html')
+not_found_html = pkg_resources.read_text(resources, '/error_pages/templates/404.html')
 
 _pages = []
 _handlers = []
@@ -32,7 +32,7 @@ class DevServer(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(bytes(placeholder_html, 'utf-8'))
+        self.wfile.write(bytes(not_found_html, 'utf-8'))
 
     def handle_API(self, method):
         if self.path.startswith('/api/'):
