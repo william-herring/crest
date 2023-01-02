@@ -1,18 +1,22 @@
+import re
+
+
 class Engine:
     """
     The Crest template engine is a collection of methods for interpreting and translating template syntax.
     """
+
     def __init__(self):
         self.statements = {
             'if': self.handle_if,
             'for': self.handle_for,
         }
 
-    def handle_if(self, read_template, start_from):
-        pass
+    def handle_if(self, statement):
+        print(statement)
 
-    def handle_for(self, read_template, start_from):
-        pass
+    def handle_for(self, statement):
+        print(statement)
 
     def render(self, template: str, props: dict):
         """
@@ -23,5 +27,12 @@ class Engine:
             content = temp.read()
             for prop in props.keys():
                 content = content.replace('{ ' + prop + ' }', props.get(prop))
+
+            logic = re.findall('(?<={%)(.*?)(?=%})', content)
+            for statement in logic:
+                try:
+                    self.statements[statement.split()[0]](statement)
+                except KeyError:
+                    continue
 
             return content

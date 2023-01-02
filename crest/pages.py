@@ -1,10 +1,14 @@
 from abc import abstractmethod
+from crest.templates import Engine
+
+engine = Engine()
 
 
 class Page:
     """
     Base page class that stores a route and template.
     """
+
     @property
     @abstractmethod
     def template(self):
@@ -33,12 +37,7 @@ class PageWithProps(Page):
         pass
 
     def render(self):
-        with open(self.template, 'r') as temp:
-            content = temp.read()
-            for prop in self.props().keys():
-                content = content.replace('{ ' + prop + ' }', self.props().get(prop))
-
-            return content
+        return engine.render(self.template, self.props())
 
 
 class DynamicPage(Page):
@@ -65,12 +64,7 @@ class DynamicPage(Page):
         return True
 
     def render(self):
-        with open(self.template, 'r') as temp:
-            content = temp.read()
-            for prop in self.props().keys():
-                content = content.replace('{ ' + prop + ' }', self.props().get(prop))
-
-            return content
+        return engine.render(self.template, self.props())
 
 
 class QueriedPage(Page):
@@ -94,9 +88,4 @@ class QueriedPage(Page):
         return False
 
     def render(self):
-        with open(self.template, 'r') as temp:
-            content = temp.read()
-            for prop in self.props().keys():
-                content = content.replace('{ ' + prop + ' }', self.props().get(prop))
-
-            return content
+        return engine.render(self.template, self.props())
