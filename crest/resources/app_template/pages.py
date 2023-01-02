@@ -1,5 +1,10 @@
-from crest.pages import PageWithProps
+from crest.pages import PageWithProps, Page
 import datetime
+
+
+class PlaceholderPage(Page):
+    route = '/'
+    template = 'placeholder.html'
 
 
 class ExamplePage(PageWithProps):
