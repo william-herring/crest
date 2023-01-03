@@ -21,6 +21,6 @@ class App:
         for page in self.pages:
             page.template = self.root + 'templates/' + page.template
         if 'port' in kwargs:
-            server.start(self.pages, self.handlers, kwargs.get('port'), self.entrypoint)
+            server.start(self, self.pages, self.handlers, kwargs.get('port'), self.entrypoint)
 
-        server.start(self.pages, self.handlers, 8000, self.entrypoint)
+        server.start(self, self.pages, self.handlers, 8000, self.entrypoint)

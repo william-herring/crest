@@ -1,10 +1,13 @@
+import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import importlib.resources as pkg_resources
-from crest import resources
+from crest.resources.error_pages import templates
 from crest.api import Request
 
 host = 'localhost'
-not_found_html = pkg_resources.read_text(resources, '/error_pages/templates/404.html')
+error_html = {
+    '404': pkg_resources.read_text(templates, '404.html')
+}
 
 _pages = []
 _handlers = []
@@ -32,7 +35,7 @@ class DevServer(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(bytes(not_found_html, 'utf-8'))
+        self.wfile.write(bytes(error_html['404'], 'utf-8'))
 
     def handle_API(self, method):
         if self.path.startswith('/api/'):
@@ -56,7 +59,7 @@ class DevServer(BaseHTTPRequestHandler):
         return False
 
 
-def start(pages, handlers, port=8000, entrypoint='/'):
+def start(app, pages, handlers, port=8000, entrypoint='/'):
     global _pages
     global _entrypoint
     global _handlers
@@ -65,6 +68,12 @@ def start(pages, handlers, port=8000, entrypoint='/'):
     if handlers is not None:
         _handlers = handlers
     server = HTTPServer((host, port), DevServer)
+
+    app_templates = os.listdir(app.root + 'templates/')
+    for k in error_html.keys():
+        if f'_{k}.html' in app_templates:
+            error_html[k] = open(app.root + 'templates/' + f'_{k}.html', 'r').read()
+
     print(f'Server started at http://{host}:{port}. Ready to accept connections.')
     try:
         server.serve_forever()
