@@ -10,9 +10,6 @@
 
     { lipsum }
 
-    {% for i in items %}
-        <p>{i}</p>
-    {% endfor %}
-
+    {% map i from items -> <p>{i}</p> %}
 </body>
 </html>

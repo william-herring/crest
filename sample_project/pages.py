@@ -29,5 +29,6 @@ class ExamplePage(PageWithProps):
     def props(self):
         return {
             'message': f'The time is {datetime.datetime.now()}',
-            'lipsum': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae velit tincidunt eros sagittis blandit.'
+            'lipsum': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae velit tincidunt eros sagittis blandit.',
+            'items': [1, 2, 3, 4, 5, 6]
         }
