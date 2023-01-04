@@ -16,7 +16,6 @@ class Engine:
         print(statement)
 
     def handle_map(self, statement, props):
-        print(f'Statement to execute: {statement}')
         function_in = statement.split('->')[0]
         function_out = statement.split('->')[1]
         result = ''
@@ -25,9 +24,7 @@ class Engine:
         iterable_name = function_in.split()[3]
         for i in props[iterable_name]:
             result += function_out.replace('{' + iterator_name + '}', str(i))
-            print(i)
 
-        print(result)
         return result
 
     def render(self, template: str, props: dict):
