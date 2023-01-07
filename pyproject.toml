@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=61.0", "typer>=0.7.0", "rich"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "crest"
 version = "1.0.0"
