@@ -8,12 +8,22 @@ class Engine:
 
     def __init__(self):
         self.statements = {
-            'if': self.handle_if,
+            'consider': self.handle_conditional,
             'map': self.handle_map,
         }
 
-    def handle_if(self, statement, props):
-        print(statement)
+    def handle_conditional(self, statement, props):
+        function_in = statement.split('->')[0]
+        function_out = statement.split('->')[1]
+        result = ''
+
+        condition_name = function_in.split()[1]
+        if props[condition_name]:
+            result = function_out.split(':')[0]
+        else:
+            result = function_out.split(':')[1]
+
+        return result
 
     def handle_map(self, statement, props):
         function_in = statement.split('->')[0]
