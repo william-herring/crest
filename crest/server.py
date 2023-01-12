@@ -3,8 +3,11 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import importlib.resources as pkg_resources
 from crest.resources.error_pages import templates
 from crest.api import Request
+from crest.templates import Engine
+
 
 host = 'localhost'
+engine = Engine()
 error_html = {
     '404': pkg_resources.read_text(templates, '404.html'),
     'error': pkg_resources.read_text(templates, 'error.html')
@@ -31,7 +34,9 @@ class DevServer(BaseHTTPRequestHandler):
                     rendered = page.render()
                     self.send_response(200)
                 except Exception as e:
-                    rendered = error_html['error']
+                    rendered = engine.render(__file__.split('server.py')[0] + 'resources/error_pages/templates/error.html', {
+                        'error_msg': str(e)
+                    })
                     self.send_response(500)
 
                 self.send_header("Content-type", "text/html")

@@ -47,6 +47,8 @@ class Engine:
             for prop in props.keys():
                 if '{ ' + prop + ' }' in content:
                     content = content.replace('{ ' + prop + ' }', props.get(prop))
+                if '{' + prop + '}' in content:
+                    content = content.replace('{' + prop + '}', props.get(prop))
 
             logic = re.findall('(?<={%)(.*?)(?=%})', content)
             for statement in logic:
