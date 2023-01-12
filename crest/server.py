@@ -6,7 +6,8 @@ from crest.api import Request
 
 host = 'localhost'
 error_html = {
-    '404': pkg_resources.read_text(templates, '404.html')
+    '404': pkg_resources.read_text(templates, '404.html'),
+    'error': pkg_resources.read_text(templates, 'error.html')
 }
 
 _pages = []
@@ -26,13 +27,19 @@ class DevServer(BaseHTTPRequestHandler):
 
         for page in _pages:
             if page.check_route(self.path):
-                self.send_response(200)
+                try:
+                    rendered = page.render()
+                    self.send_response(200)
+                except Exception as e:
+                    rendered = error_html['error']
+                    self.send_response(500)
+
                 self.send_header("Content-type", "text/html")
                 self.end_headers()
-                self.wfile.write(bytes(page.render(), 'utf-8'))
+                self.wfile.write(bytes(rendered, 'utf-8'))
                 return
 
-        self.send_response(200)
+        self.send_response(404)
         self.send_header("Content-type", "text/html")
         self.end_headers()
         self.wfile.write(bytes(error_html['404'], 'utf-8'))
