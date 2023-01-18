@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from crest.templates import Engine
+from .templates import Engine
 
 engine = Engine()
 

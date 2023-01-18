@@ -1,9 +1,9 @@
 import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import importlib.resources as pkg_resources
-from crest.resources.error_pages import templates
-from crest.api import Request
-from crest.templates import Engine
+from .resources.error_pages import templates
+from .api import Request
+from .templates import Engine
 
 
 host = 'localhost'

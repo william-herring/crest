@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "crestwebframework"
-version = "1.0.0"
+version = "1.0.4"
 authors = [{ name="William Herring", email="william.herring.au@gmail.com" }]
 description = "A web framework designed for simplicity and efficiency"
 readme = "README.md"
@@ -17,6 +17,10 @@ classifiers = [
 ]
 keywords = ["web", "framework", "crest"]
 dependencies = ["typer>=0.7.0", "rich>=12.6.0"]
+
+[tool.setuptools]
+packages = ['crest']
+py-modules = []
 
 [project.optional-dependencies]
 dev = ["pytest"]

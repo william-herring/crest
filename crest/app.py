@@ -1,4 +1,4 @@
-from crest import server
+from . import server
 
 
 class App:
