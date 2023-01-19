@@ -1,7 +1,7 @@
 ## Getting Started
 ### Installation
 ```commandline
-pip install crest
+pip install crestwebframework
 ```
 After installing crest, you should set up the CLI. The steps can vary
 depending on what operating system you are using. This guide is designed for Unix-based operating systems.
@@ -9,7 +9,7 @@ depending on what operating system you are using. This guide is designed for Uni
 ### Set Up CLI
 Firstly, locate the package.
 ```commandline
-pip3 show crest
+pip show crestwebframework
 ```
 Copy or note down the ```Location``` field and run the following commands:
 ```commandline
